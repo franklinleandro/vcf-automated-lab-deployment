@@ -261,19 +261,20 @@ No exemplo abaixo, estarei utilizando uma VLAN /24 (172.17.31/0/24). A primeira 
 
 |           Hostname          | IP Address    | Function       |
 |:---------------------------:|---------------|----------------|
-| vcf-m01-cb01.tshirts.inc    | 172.17.31.180 | Cloud Builder  |
-| vcf-m01-sddcm01.tshirts.inc | 172.17.31.181 | SDDC Manager   |
-| vcf-m01-vc01.tshirts.inc    | 172.17.31.182 | vCenter Server |
-| vcf-m01-nsx01.tshirts.inc   | 172.17.31.183 | NSX-T VIP      |
-| vcf-m01-nsx01a.tshirts.inc  | 172.17.31.184 | NSX-T Node 1   |
-| vcf-m01-esx01.tshirts.inc   | 172.17.31.185 | ESXi Host 1    |
-| vcf-m01-esx02.tshirts.inc   | 172.17.31.186 | ESXi Host 2    |
-| vcf-m01-esx03.tshirts.inc   | 172.17.31.187 | ESXi Host 3    |
-| vcf-m01-esx04.tshirts.inc   | 172.17.31.188 | ESXi Host 4    |
-| vcf-m01-esx05.tshirts.inc   | 172.17.31.189 | ESXi Host 5    |
-| vcf-m01-esx06.tshirts.inc   | 172.17.31.190 | ESXi Host 6    |
-| vcf-m01-esx07.tshirts.inc   | 172.17.31.191 | ESXi Host 7    |
-| vcf-m01-esx08.tshirts.inc   | 172.17.31.192 | ESXi Host 8    |
+| vcf-m01-cb01.vmbeer.local    | 172.17.31.180 | Cloud Builder  |
+| vcf-m01-sddcm01.vmbeer.local | 172.17.31.181 | SDDC Manager   |
+| vcf-m01-vc01.vmbeer.local    | 172.17.31.182 | vCenter Server |
+| vcf-m01-nsx01.vmbeer.local   | 172.17.31.183 | NSX-T VIP      |
+| vcf-m01-nsx01a.vmbeer.local  | 172.17.31.184 | NSX-T Node 1   |
+| vcf-m01-esx01.vmbeer.local   | 172.17.31.185 | ESXi Host 1    |
+| vcf-m01-esx02.vmbeer.local   | 172.17.31.186 | ESXi Host 2    |
+| vcf-m01-esx03.vmbeer.local   | 172.17.31.187 | ESXi Host 3    |
+| vcf-m01-esx04.vmbeer.local   | 172.17.31.188 | ESXi Host 4    |
+| vcf-m01-esx05.vmbeer.local   | 172.17.31.189 | ESXi Host 5    |
+| vcf-m01-esx06.vmbeer.local   | 172.17.31.190 | ESXi Host 6    |
+| vcf-m01-esx07.vmbeer.local   | 172.17.31.191 | ESXi Host 7    |
+| vcf-m01-esx08.vmbeer.local   | 172.17.31.192 | ESXi Host 8    |
+
 
 ### Script de Implantação do Lab
 
@@ -334,11 +335,12 @@ Aqui está um exemplo do que será implantado como parte da criação do Domíni
 
 |           Hostname          | IP Address    | Function       |
 |:---------------------------:|---------------|----------------|
-| vcf-w01-vc01.tshirts.inc    | 172.17.31.120 | vCenter Server |
-| vcf-w01-nsx01.tshirts.inc   | 172.17.31.121 | NSX-T VIP      |
-| vcf-w01-nsx01a.tshirts.inc  | 172.17.31.122 | NSX-T Node 1   |
-| vcf-w01-nsx01b.tshirts.inc  | 172.17.31.122 | NSX-T Node 2   |
-| vcf-w01-nsx01c.tshirts.inc  | 172.17.31.122 | NSX-T Node 3   |
+| vcf-w01-vc01.vmbeer.local    | 172.17.31.120 | vCenter Server |
+| vcf-w01-nsx01.vmbeer.local   | 172.17.31.121 | NSX-T VIP      |
+| vcf-w01-nsx01a.vmbeer.local  | 172.17.31.122 | NSX-T Node 1   |
+| vcf-w01-nsx01b.vmbeer.local  | 172.17.31.122 | NSX-T Node 2   |
+| vcf-w01-nsx01c.vmbeer.local  | 172.17.31.122 | NSX-T Node 3   |
+
 
 
 ### Configuration
@@ -395,7 +397,7 @@ Esta seção define as informações básicas de rede que serão necessárias pa
 ```console
 $VMNetmask = "255.255.255.0"
 $VMGateway = "172.17.31.1"
-$VMDomain = "tshirts.inc"
+$VMDomain = "vmbeer.local"
 ```
 
 ### Exemplo de Implantação
