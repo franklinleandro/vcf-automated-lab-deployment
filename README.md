@@ -24,37 +24,37 @@ Agora você está pronto para usar o VCF! 😁
 
 ## Changelog
 * **07/10/2024**
-  * Domínio de Gerenciamento:
+  * Management Domain:
     * Adiciona suporte para VCF 5.2 (senha para o Cloud Builder 5.2 deve ter no mínimo 15 caracteres)
-  * Domínio de Workload:
+  * Workload Domain:
     * Adiciona suporte para VCF 5.2
-    * Adiciona variável `$SeparateNSXSwitch` para especificar um VDS separado para o NSX (similar à opção do Domínio de Gerenciamento)
+    * Adiciona variável `$SeparateNSXSwitch` para especificar um VDS separado para o NSX (similar à opção do Management Domain)
 * **28/05/2024**
-  * Domínio de Gerenciamento:
-    * Refatora a geração do JSON do Domínio de Gerenciamento do VCF para ser mais dinâmica
+  * Management Domain:
+    * Refatora a geração do JSON do Management Domain do VCF para ser mais dinâmica
     * Refatora o código de licenciamento para suportar tanto chaves licenciadas quanto a funcionalidade de licenciamento posterior
     * Adiciona `clusterImageEnabled` ao JSON por padrão usando a variável `$EnableVCLM`
-  * Domínio de Workload:
+  * Workload Domain:
     * Adiciona variável `$EnableVCLM` para controlar a imagem baseada em vLCM para o Cluster do vSphere
-    * Adiciona variável `$VLCMImageName` para especificar a imagem baseada em vLCM desejada (por padrão usa o Domínio de Gerenciamento)
+    * Adiciona variável `$VLCMImageName` para especificar a imagem baseada em vLCM desejada (por padrão usa o Management Domain)
     * Adiciona variável `$EnableVSANESA` para especificar se o vSAN ESA está habilitado
     * Adiciona variável `$NestedESXiWLDVSANESA` para especificar se a VM ESXi Nested para WLD será usada para vSAN ESA, requerendo um controlador NVME ao invés de um controlador PVSCSI (padrão)
     * Refatora o código de licenciamento para suportar tanto chaves licenciadas quanto a funcionalidade de licenciamento posterior
 * **27/03/2024**
   * Adiciona suporte para licenciamento posterior (também conhecido como modo de avaliação de 60 dias)
 * **08/02/2024**
-  * Adiciona script suplementar `vcf-automated-workload-domain-deployment.ps1` para automatizar a implantação do Domínio de Workload
+  * Adiciona script suplementar `vcf-automated-workload-domain-deployment.ps1` para automatizar a implantação do Workload Domain
 * **05/02/2024**
   * Melhora o código de substituição para redes CIDR de ESXi vMotion, vSAN & NSX
   * Renomeia variáveis (`$CloudbuilderVMName`,`$CloudbuilderHostname`,`$SddcManagerName`,`$NSXManagerVIPName`,`$NSXManagerNode1Name`) para (`$CloudbuilderVMHostname`,`$CloudbuilderFQDN`,`$SddcManagerHostname`,`$NSXManagerVIPHostname`,`$NSXManagerNode1Hostname`) para representar melhor o valor esperado (Hostname e FQDN)
 * **03/02/2024**
   * Adiciona suporte para definir recursos (CPU, memória e armazenamento) de forma independente para VMs ESXi Nested para uso com Domínios de Gerenciamento e/ou Workload
-  * Gera automaticamente o arquivo JSON de comissão de hosts do Domínio de Workload do VCF (vcf-commission-host-api.json) para uso com a API do SDDC Manager (a interface agora incluirá `-ui` no nome do arquivo)
+  * Gera automaticamente o arquivo JSON de comissão de hosts do Workload Domain do VCF (vcf-commission-host-api.json) para uso com a API do SDDC Manager (a interface agora incluirá `-ui` no nome do arquivo)
 * **29/01/2024**
   * Adiciona suporte para [VCF 5.1]([texto](https://blogs.vmware.com/cloud-foundation/2023/11/07/announcing-availability-of-vmware-cloud-foundation-5-1/))
-  * Inicia automaticamente a criação do Domínio de Gerenciamento do VCF no SDDC Manager usando o arquivo JSON de implantação gerado (vcf-mgmt.json)
-  * Adiciona suporte para implantar hosts ESXi Nested para Domínio de Workload
-  * Gera automaticamente o arquivo JSON de comissão de hosts do Domínio de Workload do VCF (vcf-commission-host.json) para o SDDC Manager
+  * Inicia automaticamente a criação do Management Domain do VCF no SDDC Manager usando o arquivo JSON de implantação gerado (vcf-mgmt.json)
+  * Adiciona suporte para implantar hosts ESXi Nested para Workload Domain
+  * Gera automaticamente o arquivo JSON de comissão de hosts do Workload Domain do VCF (vcf-commission-host.json) para o SDDC Manager
   * Adiciona argumento `-CoresPerSocket` para otimizar a implantação de ESXi Nested para licenciamento
   * Adiciona variáveis (`$NestedESXivMotionNetworkCidr`, `$NestedESXivSANNetworkCidr` e `$NestedESXiNSXTepNetworkCidr`) para personalizar os CIDRs das redes vMotion, vSAN e NSX TEP do ESXi
 
@@ -65,7 +65,7 @@ Agora você está pronto para usar o VCF! 😁
   * Adiciona nota sobre Cluster habilitado com DRS para criação de vApp e pré-checagem no código
 
 * **21/02/2023**
-  * Adiciona nota à Configuração para implantar o Domínio de Gerenciamento do VCF usando apenas um único host ESXi
+  * Adiciona nota à Configuração para implantar o Management Domain do VCF usando apenas um único host ESXi
 
 * **09/02/2023**
   * Atualiza a memória do ESXi para corrigir falhas nas tarefas "Configurar o Transport Node do NSX-T Data Center" e "Reconfigurar a Alta Disponibilidade do vSphere" aumentando a memória do ESXi para 46GB [explicado aqui](http://strivevirtually.net)
@@ -95,13 +95,13 @@ Agora você está pronto para usar o VCF! 😁
   * Habilite [MAC Learning](https://williamlam.com/2018/04/native-mac-learning-in-vsphere-6-7-removes-the-need-for-promiscuous-mode-for-nested-esxi.html) ou [Modo Promíscuo](https://kb.vmware.com/kb/1004099) na rede do seu host ESXi físico para garantir a conectividade de rede adequada para cargas de trabalho ESXi Nested
 * Requisitos de Recursos
     * Computação
-        * Capacidade de provisionar VMs com até 8 vCPUs (12 vCPUs necessárias para implantação do Domínio de Workload)
+        * Capacidade de provisionar VMs com até 8 vCPUs (12 vCPUs necessárias para implantação do Workload Domain)
         * Capacidade de provisionar até 384 GB de memória
         * Cluster habilitado com DRS (não obrigatório, mas a criação de vApps não será possível)
     * Rede
         * 1 x Portgroup Padrão ou Distribuído (roteável) para implantar todas as VMs (VCSA, NSX-T Manager & NSX-T Edge)
            * 13 x Endereços IP para Cloud Builder, SDDC Manager, VCSA, ESXi e VMs NSX-T
-           * 9 x Endereços IP para implantação do Domínio de Workload (se aplicável) para ESXi, NSX e VCSA
+           * 9 x Endereços IP para implantação do Workload Domain (se aplicável) para ESXi, NSX e VCSA
     * Armazenamento
         * Capacidade de provisionar até 1,25 TB de armazenamento
 
@@ -134,7 +134,7 @@ $VSANLicense = ""
 $NSXLicense = ""
 ```
 
-Esta seção define as configurações do VCF, incluindo o nome dos arquivos de saída para implantar o Domínio de Gerenciamento do VCF, juntamente com hosts ESXi adicionais para comissionar para uso com a interface do SDDC Manager ou API para implantação do Domínio de Workload do VCF. Os valores padrão são suficientes.
+Esta seção define as configurações do VCF, incluindo o nome dos arquivos de saída para implantar o Management Domain do VCF, juntamente com hosts ESXi adicionais para comissionar para uso com a interface do SDDC Manager ou API para implantação do Workload Domain do VCF. Os valores padrão são suficientes.
 ```console
 $VCFManagementDomainPoolName = "vcf-m01-rp01"
 $VCFManagementDomainJSONFile = "vcf-mgmt.json"
@@ -172,7 +172,7 @@ $NestedESXiHostnameToIPsForManagementDomain = @{
 }
 ```
 
-Esta seção define o número de VMs ESXi Nested a serem implantadas, juntamente com seus endereços IP associados para uso em uma implantação de Domínio de Workload. Os nomes são os nomes de exibição das VMs quando implantadas, e você deve garantir que esses nomes sejam adicionados à sua infraestrutura DNS. Um mínimo de quatro hosts deve ser usado para a implantação do Domínio de Workload.
+Esta seção define o número de VMs ESXi Nested a serem implantadas, juntamente com seus endereços IP associados para uso em uma implantação de Workload Domain. Os nomes são os nomes de exibição das VMs quando implantadas, e você deve garantir que esses nomes sejam adicionados à sua infraestrutura DNS. Um mínimo de quatro hosts deve ser usado para a implantação do Workload Domain.
 ```console
 $NestedESXiHostnameToIPsForWorkloadDomain = @{
     "vcf-m01-esx05"   = "172.17.31.189"
@@ -182,9 +182,9 @@ $NestedESXiHostnameToIPsForWorkloadDomain = @{
 }
 ```
 
-**Nota:** Um Domínio de Gerenciamento do VCF pode ser implantado com apenas uma única VM ESXi Nested. Para mais detalhes, consulte este [post no blog](https://williamlam.com/2023/02/vmware-cloud-foundation-with-a-single-esxi-host-for-management-domain.html) para os ajustes necessários.
+**Nota:** Um Management Domain do VCF pode ser implantado com apenas uma única VM ESXi Nested. Para mais detalhes, consulte este [post no blog](https://williamlam.com/2023/02/vmware-cloud-foundation-with-a-single-esxi-host-for-management-domain.html) para os ajustes necessários.
 
-Esta seção descreve a quantidade de recursos a serem alocados para as VMs ESXi Nested, tanto para o Domínio de Gerenciamento quanto para o Domínio de Workload (caso você opte por implantá-lo). Dependendo do seu uso, você pode querer aumentar os recursos, mas para a funcionalidade adequada, este é o mínimo necessário para começar. Para a configuração de Memória e Disco, a unidade é em GB.
+Esta seção descreve a quantidade de recursos a serem alocados para as VMs ESXi Nested, tanto para o Management Domain quanto para o Workload Domain (caso você opte por implantá-lo). Dependendo do seu uso, você pode querer aumentar os recursos, mas para a funcionalidade adequada, este é o mínimo necessário para começar. Para a configuração de Memória e Disco, a unidade é em GB.
 ```console
 # Nested ESXi VM Resources for Management Domain
 $NestedESXiMGMTvCPU = "12"
@@ -292,9 +292,9 @@ Uma vez concluído, você terminará com oito VMs ESXi Nested e VMs do VMware Cl
 
 ![](screenshots/screenshot-3.png)
 
-### Implantar Domínio de Gerenciamento do VCF
+### Implantar Management Domain do VCF
 
-Por padrão, o script gerará automaticamente o arquivo de implantação necessário para o Domínio de Gerenciamento do VCF, `vcf-mgmt.json`, com base na sua implantação específica e o salvará no diretório de trabalho atual. Além disso, o arquivo de implantação do VCF será automaticamente enviado ao SDDC Manager e o processo de Bringup do VCF será iniciado, o que em versões anteriores deste script era feito manualmente pelo usuário final.
+Por padrão, o script gerará automaticamente o arquivo de implantação necessário para o Management Domain do VCF, `vcf-mgmt.json`, com base na sua implantação específica e o salvará no diretório de trabalho atual. Além disso, o arquivo de implantação do VCF será automaticamente enviado ao SDDC Manager e o processo de Bringup do VCF será iniciado, o que em versões anteriores deste script era feito manualmente pelo usuário final.
 
 Agora, você pode simplesmente abrir um navegador da web na sua implantação do SDDC Manager e monitorar o progresso do Bringup do VCF.
 
@@ -315,23 +315,23 @@ Clique no botão Concluir, o que deverá solicitar que você faça login no SDDC
 
 ## Método Manual
 
-Por padrão, o script gerará automaticamente o arquivo de comissão de hosts do Domínio de Workload do VCF, `vcf-commission-host-ui.json`, com base na sua implantação específica e o salvará no diretório de trabalho atual.
+Por padrão, o script gerará automaticamente o arquivo de comissão de hosts do Workload Domain do VCF, `vcf-commission-host-ui.json`, com base na sua implantação específica e o salvará no diretório de trabalho atual.
 
-Uma vez que o Domínio de Gerenciamento do VCF tenha sido implantado, você pode fazer login na interface do SDDC Manager e, em `Inventory->Hosts`, clicar no botão `COMMISSION HOSTS` e fazer o upload do arquivo de configuração JSON gerado.
+Uma vez que o Management Domain do VCF tenha sido implantado, você pode fazer login na interface do SDDC Manager e, em `Inventory->Hosts`, clicar no botão `COMMISSION HOSTS` e fazer o upload do arquivo de configuração JSON gerado.
 
 **Nota:** Atualmente, existe um esquema JSON diferente entre a interface do SDDC Manager e a API para a comissão de hosts, e o arquivo JSON gerado só pode ser usado pela interface do SDDC Manager. Para a API, você precisará fazer algumas alterações no arquivo, incluindo substituir o `networkPoolName` pelo `networkPoolId` correto. Para mais detalhes, consulte o formato JSON na [API de Comissão de Hosts do VCF](https://developer.vmware.com/apis/vcf/latest/v1/hosts/post/).
 
 ![](screenshots/screenshot-8.png)
 
-Uma vez que os hosts ESXi tenham sido adicionados ao SDDC Manager, você poderá realizar uma implantação manual do Domínio de Workload do VCF usando a interface do SDDC Manager ou a API.
+Uma vez que os hosts ESXi tenham sido adicionados ao SDDC Manager, você poderá realizar uma implantação manual do Workload Domain do VCF usando a interface do SDDC Manager ou a API.
 
 ![](screenshots/screenshot-9.png)
 
 ## Método Automatizado
 
-Um script de automação suplementar, `vcf-automated-workload-domain-deployment.ps1`, será usado para configurar automaticamente o domínio de Workload. Ele assumirá que o arquivo de comissão de hosts do Domínio de Workload do VCF, `vcf-commission-host-api.json`, foi gerado a partir da execução do script de implantação inicial, e este arquivo conterá um campo "TBD" porque a API do SDDC Manager espera o ID do Pool de Rede do Domínio de Gerenciamento, que será recuperado automaticamente como parte do uso da automação adicional.
+Um script de automação suplementar, `vcf-automated-workload-domain-deployment.ps1`, será usado para configurar automaticamente o Workload Domain. Ele assumirá que o arquivo de comissão de hosts do Workload Domain do VCF, `vcf-commission-host-api.json`, foi gerado a partir da execução do script de implantação inicial, e este arquivo conterá um campo "TBD" porque a API do SDDC Manager espera o ID do Pool de Rede do Management Domain, que será recuperado automaticamente como parte do uso da automação adicional.
 
-Aqui está um exemplo do que será implantado como parte da criação do Domínio de Workload:
+Aqui está um exemplo do que será implantado como parte da criação do Workload Domain:
 
 |           Hostname          | IP Address    | Function       |
 |:---------------------------:|---------------|----------------|
@@ -345,7 +345,7 @@ Aqui está um exemplo do que será implantado como parte da criação do Domíni
 
 ### Configuration
 
-Esta seção descreve as credenciais do seu SDDC Manager implantado a partir da configuração do Domínio de Gerenciamento:
+Esta seção descreve as credenciais do seu SDDC Manager implantado a partir da configuração do Management Domain:
 ```console
 $sddcManagerFQDN = "FILL_ME_IN"
 $sddcManagerUsername = "FILL_ME_IN"
@@ -359,7 +359,7 @@ $VSANLicense = "FILL_ME_IN"
 $NSXLicense = "FILL_ME_IN"
 ```
 
-Esta seção define as configurações do Domínio de Gerenciamento e do Domínio de Workload, onde os valores padrão devem ser suficientes, a menos que você tenha modificado algo no script de implantação original.
+Esta seção define as configurações do Management Domain e do Workload Domain, onde os valores padrão devem ser suficientes, a menos que você tenha modificado algo no script de implantação original.
 ```console
 $VCFManagementDomainPoolName = "vcf-m01-rp01"
 $VCFWorkloadDomainAPIJSONFile = "vcf-commission-host-api.json"
@@ -370,16 +370,16 @@ $VLCMImageName = "Management-Domain-ESXi-Personality"
 $EnableVSANESA = $false
 ```
 
-> **Nota:** Se você for implantar o Domínio de Workload do VCF com o vLCM habilitado, certifique-se de que o nome `$VLCMImageName` corresponda ao que você vê no SDDC Manager em Lifecycle Management->Image Management. No VCF 5.2, o nome padrão deve ser "Management-Domain-ESXi-Personality", e no VCF 5.1.x, o nome padrão deve ser "Management-Domain-Personality", mas é melhor confirmar antes de prosseguir com a implantação.
+> **Nota:** Se você for implantar o Workload Domain do VCF com o vLCM habilitado, certifique-se de que o nome `$VLCMImageName` corresponda ao que você vê no SDDC Manager em Lifecycle Management->Image Management. No VCF 5.2, o nome padrão deve ser "Management-Domain-ESXi-Personality", e no VCF 5.1.x, o nome padrão deve ser "Management-Domain-Personality", mas é melhor confirmar antes de prosseguir com a implantação.
 
-Esta seção define a configuração do vCenter Server que será usada no Domínio de Workload.
+Esta seção define a configuração do vCenter Server que será usada no Workload Domain.
 ```console
 $VCSAHostname = "vcf-w01-vc01"
 $VCSAIP = "172.17.31.120"
 $VCSARootPassword = "VMware1!"
 ```
 
-Esta seção define as configurações do NSX Manager que serão usadas no Domínio de Workload.
+Esta seção define as configurações do NSX Manager que serão usadas no Workload Domain.
 ```console
 $NSXManagerVIPHostname = "vcf-w01-nsx01"
 $NSXManagerVIPIP = "172.17.31.121"
@@ -410,15 +410,15 @@ Aqui está um exemplo de saída de uma implantação concluída:
 
 ![](screenshots/screenshot-11.png)
 
-**Nota:** Embora o script deva ser concluído em cerca de 3-4 minutos, a criação real do Domínio de Workload levará um pouco mais de tempo e dependerá dos seus recursos.
+**Nota:** Embora o script deva ser concluído em cerca de 3-4 minutos, a criação real do Workload Domain levará um pouco mais de tempo e dependerá dos seus recursos.
 
-Para monitorar o progresso da implantação do seu Domínio de Workload, faça login na interface do SDDC Manager.
+Para monitorar o progresso da implantação do seu Workload Domain, faça login na interface do SDDC Manager.
 
 ![](screenshots/screenshot-12.png)
 
 ![](screenshots/screenshot-13.png)
 
-Se você agora fizer login na interface do vSphere para o seu Domínio de Gerenciamento, deverá ver o seguinte inventário:
+Se você agora fizer login na interface do vSphere para o seu Management Domain, deverá ver o seguinte inventário:
 
 ![](screenshots/screenshot-14.png)
 
