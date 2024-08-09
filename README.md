@@ -24,109 +24,109 @@ Agora você está pronto para usar o VCF! 😁
 
 ## Changelog
 * **07/10/2024**
-  * Management Domain:
-    * Add support for VCF 5.2 (password for Cloud Builder 5.2 must be 15 characters minimum)
-  * Workload Domain:
-    * Add support for VCF 5.2
-    * Add `$SeparateNSXSwitch` variable to specify separate VDS for NSX (simliar to Management Domain option)
-* **05/28/2024**
-  * Management Domain:
-    * Refactor VCF Management Domain JSON generation to be more dynamic
-    * Refactor licensing code to support both licensed keys or license later feature
-    * Add required `clusterImageEnabled` to JSON by default using `$EnableVCLM` variable
-  * Workload Domain:
-    * Add `$EnableVCLM` variable to control vLCM-based image for vSphere Cluster
-    * Add `$VLCMImageName` variable to specify desired vLCM-based image (default uses Management Domain)
-    * Add `$EnableVSANESA` variable to specify whether vSAN ESA is enabled
-    * Add `$NestedESXiWLDVSANESA` variable to specify whether Nested ESXi VM for WLD will be used for vSAN ESA, requiring NVME controller vs PVSCSI controller (default)
-    * Refactor licensing code to support both licensed keys or license later feature
-* **03/27/2024**
-  * Added support for license later (aka 60 day evaluation mode)
-* **02/08/2024**
-  * Added supplemental script `vcf-automated-workload-domain-deployment.ps1` to automate the deployment of Workload Domain
-* **02/05/2024**
-  * Improve substitution code for ESXi vMotion, vSAN & NSX CIDR network
-  * Renamed variables (`$CloudbuilderVMName`,`$CloudbuilderHostname`,`$SddcManagerName`,`$NSXManagerVIPName`,`$NSXManagerNode1Name`) to (`$CloudbuilderVMHostname`,`$CloudbuilderFQDN`,`$SddcManagerHostname`,`$NSXManagerVIPHostname`,`$NSXManagerNode1Hostname`) to better represent the expected value (Hostname and FQDN)
-* **02/03/2024**
-  * Added support to independently define resources (cpu, memory and storage) for Nested ESXi VMs for use with Management and/or Workload Domains
-  * Automatically generate VCF Workload Domain host commission JSON file (vcf-commission-host-api.json) for use with SDDC Manager API (UI will now include `-ui` in the filename)
-* **01/29/2024**
-  * Added support for [VCF 5.1]([text](https://blogs.vmware.com/cloud-foundation/2023/11/07/announcing-availability-of-vmware-cloud-foundation-5-1/))
-  * Automatically start VCF Management Domain bringup in SDDC Manager using generated JSON deployment file (vcf-mgmt.json)
-  * Added support for deploying Nested ESXi hosts for Workload Domain
-  * Automatically generate VCF Workload Domain host commission JSON file (vcf-commission-host.json) for SDDC Manager
-  * Added `-CoresPerSocket` argument to optimize for Nested ESXi deployment for licensing
-  * Added variables (`$NestedESXivMotionNetworkCidr`, `$NestedESXivSANNetworkCidr` and `$NestedESXiNSXTepNetworkCidr`) for customizing ESXi vMotion, vSAN and NSX TEP network CIDRs
+  * Domínio de Gerenciamento:
+    * Adiciona suporte para VCF 5.2 (senha para o Cloud Builder 5.2 deve ter no mínimo 15 caracteres)
+  * Domínio de Workload:
+    * Adiciona suporte para VCF 5.2
+    * Adiciona variável `$SeparateNSXSwitch` para especificar um VDS separado para o NSX (similar à opção do Domínio de Gerenciamento)
+* **28/05/2024**
+  * Domínio de Gerenciamento:
+    * Refatora a geração do JSON do Domínio de Gerenciamento do VCF para ser mais dinâmica
+    * Refatora o código de licenciamento para suportar tanto chaves licenciadas quanto a funcionalidade de licenciamento posterior
+    * Adiciona `clusterImageEnabled` ao JSON por padrão usando a variável `$EnableVCLM`
+  * Domínio de Workload:
+    * Adiciona variável `$EnableVCLM` para controlar a imagem baseada em vLCM para o Cluster do vSphere
+    * Adiciona variável `$VLCMImageName` para especificar a imagem baseada em vLCM desejada (por padrão usa o Domínio de Gerenciamento)
+    * Adiciona variável `$EnableVSANESA` para especificar se o vSAN ESA está habilitado
+    * Adiciona variável `$NestedESXiWLDVSANESA` para especificar se a VM ESXi Nested para WLD será usada para vSAN ESA, requerendo um controlador NVME ao invés de um controlador PVSCSI (padrão)
+    * Refatora o código de licenciamento para suportar tanto chaves licenciadas quanto a funcionalidade de licenciamento posterior
+* **27/03/2024**
+  * Adiciona suporte para licenciamento posterior (também conhecido como modo de avaliação de 60 dias)
+* **08/02/2024**
+  * Adiciona script suplementar `vcf-automated-workload-domain-deployment.ps1` para automatizar a implantação do Domínio de Workload
+* **05/02/2024**
+  * Melhora o código de substituição para redes CIDR de ESXi vMotion, vSAN & NSX
+  * Renomeia variáveis (`$CloudbuilderVMName`,`$CloudbuilderHostname`,`$SddcManagerName`,`$NSXManagerVIPName`,`$NSXManagerNode1Name`) para (`$CloudbuilderVMHostname`,`$CloudbuilderFQDN`,`$SddcManagerHostname`,`$NSXManagerVIPHostname`,`$NSXManagerNode1Hostname`) para representar melhor o valor esperado (Hostname e FQDN)
+* **03/02/2024**
+  * Adiciona suporte para definir recursos (CPU, memória e armazenamento) de forma independente para VMs ESXi Nested para uso com Domínios de Gerenciamento e/ou Workload
+  * Gera automaticamente o arquivo JSON de comissão de hosts do Domínio de Workload do VCF (vcf-commission-host-api.json) para uso com a API do SDDC Manager (a interface agora incluirá `-ui` no nome do arquivo)
+* **29/01/2024**
+  * Adiciona suporte para [VCF 5.1]([texto](https://blogs.vmware.com/cloud-foundation/2023/11/07/announcing-availability-of-vmware-cloud-foundation-5-1/))
+  * Inicia automaticamente a criação do Domínio de Gerenciamento do VCF no SDDC Manager usando o arquivo JSON de implantação gerado (vcf-mgmt.json)
+  * Adiciona suporte para implantar hosts ESXi Nested para Domínio de Workload
+  * Gera automaticamente o arquivo JSON de comissão de hosts do Domínio de Workload do VCF (vcf-commission-host.json) para o SDDC Manager
+  * Adiciona argumento `-CoresPerSocket` para otimizar a implantação de ESXi Nested para licenciamento
+  * Adiciona variáveis (`$NestedESXivMotionNetworkCidr`, `$NestedESXivSANNetworkCidr` e `$NestedESXiNSXTepNetworkCidr`) para personalizar os CIDRs das redes vMotion, vSAN e NSX TEP do ESXi
 
-* **03/27/2023**
-  * Enable Multiple deployment on the same Cluster
+* **27/03/2023**
+  * Habilita múltiplas implantações no mesmo Cluster
 
-* **02/28/2023**
-  * Added note on DRS-enabled Cluster for vApp creation and pre-check in code
+* **28/02/2023**
+  * Adiciona nota sobre Cluster habilitado com DRS para criação de vApp e pré-checagem no código
 
-* **02/21/2023**
-  * Added note to Configuration for deploying VCF Management Domain using only a single ESXi host
+* **21/02/2023**
+  * Adiciona nota à Configuração para implantar o Domínio de Gerenciamento do VCF usando apenas um único host ESXi
 
-* **02/09/2023**
-  * Update ESXi Memory to fix "Configure NSX-T Data Center Transport Node" and "Reconfigure vSphere High Availability" failing tasks by increasing ESXi memory to 46GB [explained here](http://strivevirtually.net)
+* **09/02/2023**
+  * Atualiza a memória do ESXi para corrigir falhas nas tarefas "Configurar o Transport Node do NSX-T Data Center" e "Reconfigurar a Alta Disponibilidade do vSphere" aumentando a memória do ESXi para 46GB [explicado aqui](http://strivevirtually.net)
 
-* **01/21/2023**
-  * Added support for [VCF 4.5](https://imthiyaz.cloud/automated-vcf-deployment-script-with-nested-esxi)
-  * Fixed vSAN bootdisk size
-  * Follow [KB 89990](https://kb.vmware.com/s/article/89990) if you get "Gateway IP Address for Management is not contactable"
-  * If Failed VSAN Diskgroup follow [FakeSCSIReservations](https://williamlam.com/2013/11/how-to-run-nested-esxi-on-top-of-vsan.html)
+* **21/01/2023**
+  * Adiciona suporte para [VCF 4.5](https://imthiyaz.cloud/automated-vcf-deployment-script-with-nested-esxi)
+  * Corrige o tamanho do disco de boot do vSAN
+  * Siga [KB 89990](https://kb.vmware.com/s/article/89990) se você receber "O endereço IP do gateway para o gerenciamento não é contatável"
+  * Se falhar a criação do Diskgroup do VSAN, siga [FakeSCSIReservations](https://williamlam.com/2013/11/how-to-run-nested-esxi-on-top-of-vsan.html)
 
-* **05/25/2021**
-  * Initial Release
+* **25/05/2021**
+  * Lançamento Inicial
 
-## Requirements
+## Requisitos
 
-* Supported VCF Versions and required build-of-materials (BOM)
+* Versões suportadas do VCF e os materiais necessários (BOM)
 
-| VCF Version | Cloud Builder Download                                                                                                                                                                                                                     | Nested ESXi Download                                                       |
+| Versão VCF | Download do Cloud Builder                                                                                                                                                                                                                     | Download do ESXi Nested                                                       |
 |-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| 5.2         | [ VMware Cloud Builder 5.2 (23480823) OVA ]([https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Cloud%20Foundation&displayGroup=VMware%20Cloud%20Foundation%205.2&release=5.2&os=&servicePk=520823&language=EN )     | [ Nested ESXi 8.0 Update 3 OVA ]( https://community.broadcom.com/flings )  |
-| 5.1.1       | [ VMware Cloud Builder 5.1.1 (23480823) OVA ]( [https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Cloud%20Foundation&displayGroup=VMware%20Cloud%20Foundation%205.1&release=5.1.1&os=&servicePk=208634&language=EN ) | [ Nested ESXi 8.0 Update 2b OVA ]( https://community.broadcom.com/flings ) |
-| 5.1         | [VMware Cloud Builder 5.1 (22688368) OVA]([https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Cloud%20Foundation&displayGroup=VMware%20Cloud%20Foundation%205.1&release=5.1&os=&servicePk=203383&language=EN)         | [ Nested ESXi 8.0 Update 2 OVA ]( https://community.broadcom.com/flings )  |
+| 5.2         | [VMware Cloud Builder 5.2 (23480823) OVA](https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Cloud%20Foundation&displayGroup=VMware%20Cloud%20Foundation%205.2&release=5.2&os=&servicePk=520823&language=EN)     | [Nested ESXi 8.0 Update 3 OVA](https://community.broadcom.com/flings)  |
+| 5.1.1       | [VMware Cloud Builder 5.1.1 (23480823) OVA](https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Cloud%20Foundation&displayGroup=VMware%20Cloud%20Foundation%205.1&release=5.1.1&os=&servicePk=208634&language=EN) | [Nested ESXi 8.0 Update 2b OVA](https://community.broadcom.com/flings) |
+| 5.1         | [VMware Cloud Builder 5.1 (22688368) OVA](https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Cloud%20Foundation&displayGroup=VMware%20Cloud%20Foundation%205.1&release=5.1&os=&servicePk=203383&language=EN)         | [Nested ESXi 8.0 Update 2 OVA](https://community.broadcom.com/flings)  |
 
-* vCenter Server running at least vSphere 7.0 or later
-    * If your physical storage is vSAN, please ensure you've applied the following setting as mentioned [here](https://www.williamlam.com/2013/11/how-to-run-nested-esxi-on-top-of-vsan.html)
-* ESXi Networking
-  * Enable either [MAC Learning](https://williamlam.com/2018/04/native-mac-learning-in-vsphere-6-7-removes-the-need-for-promiscuous-mode-for-nested-esxi.html) or [Promiscuous Mode](https://kb.vmware.com/kb/1004099) on your physical ESXi host networking to ensure proper network connectivity for Nested ESXi workloads
-* Resource Requirements
-    * Compute
-        * Ability to provision VMs with up to 8 vCPU (12 vCPU required for Workload Domain deployment)
-        * Ability to provision up to 384 GB of memory
-        * DRS-enabled Cluster (not required but vApp creation will not be possible)
-    * Network
-        * 1 x Standard or Distributed Portgroup (routable) to deploy all VMs (VCSA, NSX-T Manager & NSX-T Edge)
-           * 13 x IP Addresses for Cloud Builder, SDDC Manager, VCSA, ESXi and NSX-T VMs
-           * 9 x IP Addresses for Workload Domain Deployment (if applicable) for ESXi, NSX and VCSA
-    * Storage
-        * Ability to provision up to 1.25 TB of storage
+* Servidor vCenter rodando pelo menos vSphere 7.0 ou posterior
+    * Se o seu armazenamento físico for vSAN, certifique-se de que você aplicou a seguinte configuração mencionada [aqui](https://www.williamlam.com/2013/11/how-to-run-nested-esxi-on-top-of-vsan.html)
+* Rede do ESXi
+  * Habilite [MAC Learning](https://williamlam.com/2018/04/native-mac-learning-in-vsphere-6-7-removes-the-need-for-promiscuous-mode-for-nested-esxi.html) ou [Modo Promíscuo](https://kb.vmware.com/kb/1004099) na rede do seu host ESXi físico para garantir a conectividade de rede adequada para cargas de trabalho ESXi Nested
+* Requisitos de Recursos
+    * Computação
+        * Capacidade de provisionar VMs com até 8 vCPUs (12 vCPUs necessárias para implantação do Domínio de Workload)
+        * Capacidade de provisionar até 384 GB de memória
+        * Cluster habilitado com DRS (não obrigatório, mas a criação de vApps não será possível)
+    * Rede
+        * 1 x Portgroup Padrão ou Distribuído (roteável) para implantar todas as VMs (VCSA, NSX-T Manager & NSX-T Edge)
+           * 13 x Endereços IP para Cloud Builder, SDDC Manager, VCSA, ESXi e VMs NSX-T
+           * 9 x Endereços IP para implantação do Domínio de Workload (se aplicável) para ESXi, NSX e VCSA
+    * Armazenamento
+        * Capacidade de provisionar até 1,25 TB de armazenamento
 
-        **Note:** For detailed requirements, plesae refer to the planning and preparation workbook [here](https://docs.vmware.com/en/VMware-Cloud-Foundation/5.1/vcf-planning-and-preparation-workbook.zip)
-* VMware Cloud Foundation 5.x Licenses for vCenter, ESXi, vSAN and NSX-T (VCF 5.1.1 or later supports [License Later](https://williamlam.com/2024/03/enabling-license-later-evaluation-mode-for-vmware-cloud-foundation-vcf-5-1-1.html) feature, so license keys are now optional)
-* Desktop (Windows, Mac or Linux) with latest PowerShell Core and PowerCLI 12.1 Core installed. See [instructions here](https://blogs.vmware.com/PowerCLI/2018/03/installing-powercli-10-0-0-macos.html) for more details
+        **Nota:** Para requisitos detalhados, consulte a planilha de planejamento e preparação [aqui](https://docs.vmware.com/en/VMware-Cloud-Foundation/5.1/vcf-planning-and-preparation-workbook.zip)
+* Licenças do VMware Cloud Foundation 5.x para vCenter, ESXi, vSAN e NSX-T (VCF 5.1.1 ou posterior suporta a funcionalidade [Licenciar Depois](https://williamlam.com/2024/03/enabling-license-later-evaluation-mode-for-vmware-cloud-foundation-vcf-5-1-1.html), portanto, as chaves de licença agora são opcionais)
+* Desktop (Windows, Mac ou Linux) com o PowerShell Core mais recente e PowerCLI 12.1 Core instalado. Veja [instruções aqui](https://blogs.vmware.com/PowerCLI/2018/03/installing-powercli-10-0-0-macos.html) para mais detalhes
 
-## Configuration
+## Configuração
 
-Before you can run the script, you will need to edit the script and update a number of variables to match your deployment environment. Details on each section is described below including actual values used in my home lab environment.
+Antes de executar o script, você precisará editá-lo e atualizar várias variáveis para corresponder ao seu ambiente de implantação. Os detalhes de cada seção são descritos abaixo, incluindo os valores reais usados no meu ambiente de home lab.
 
-This section describes the credentials to your physical vCenter Server in which the VCF lab environment will be deployed to:
+Esta seção descreve as credenciais do seu vCenter Server físico onde o ambiente do laboratório VCF será implantado:
 ```console
 $VIServer = "FILL-ME-IN"
 $VIUsername = "FILL-ME-IN"
 $VIPassword = "FILL-ME-IN"
 ```
 
-This section describes the location of the files required for deployment.
+Esta seção descreve a localização dos arquivos necessários para a implantação.
 ```console
 $NestedESXiApplianceOVA = "C:\Users\william\Desktop\VCF\Nested_ESXi8.0u2b_Appliance_Template_v1.ova"
 $CloudBuilderOVA = "C:\Users\william\Desktop\VCF\VMware-Cloud-Builder-5.1.1.0-23480823_OVF10.ova"
 ```
 
-This section defines the licenses for each component within VCF. If you wish to use 60 day evaluational mode, you can leave these fields blank but you need to use VCF 5.1.1 or later
+Esta seção define as licenças para cada componente dentro do VCF. Se você deseja usar o modo de avaliação de 60 dias, pode deixar esses campos em branco, mas precisa usar o VCF 5.1.1 ou posterior.
 ```console
 $VCSALicense = ""
 $ESXILicense = ""
@@ -134,7 +134,7 @@ $VSANLicense = ""
 $NSXLicense = ""
 ```
 
-This section defines the VCF configurations including the name of the output files for deploying the VCF Management Domain along with additional ESXi hosts to commission for use with either SDDC Manager UI or API for VCF Workload Domain deployment. The default values are sufficient.
+Esta seção define as configurações do VCF, incluindo o nome dos arquivos de saída para implantar o Domínio de Gerenciamento do VCF, juntamente com hosts ESXi adicionais para comissionar para uso com a interface do SDDC Manager ou API para implantação do Domínio de Workload do VCF. Os valores padrão são suficientes.
 ```console
 $VCFManagementDomainPoolName = "vcf-m01-rp01"
 $VCFManagementDomainJSONFile = "vcf-mgmt.json"
@@ -142,7 +142,7 @@ $VCFWorkloadDomainUIJSONFile = "vcf-commission-host-ui.json"
 $VCFWorkloadDomainAPIJSONFile = "vcf-commission-host-api.json"
 ```
 
-This section describes the configuration for the VMware Cloud Builder virtual appliance:
+Esta seção descreve a configuração para o appliance virtual VMware Cloud Builder:
 ```console
 $CloudbuilderVMHostname = "vcf-m01-cb01"
 $CloudbuilderFQDN = "vcf-m01-cb01.tshirts.inc"
@@ -152,7 +152,7 @@ $CloudbuilderAdminPassword = "VMw@re123!"
 $CloudbuilderRootPassword = "VMw@re123!"
 ```
 
-This section describes the configuration that will be used to deploy SDDC Manager within the Nested ESXi environment:
+Esta seção descreve a configuração que será usada para implantar o SDDC Manager dentro do ambiente ESXi Nested:
 ```console
 $SddcManagerHostname = "vcf-m01-sddcm01"
 $SddcManagerIP = "172.17.31.181"
@@ -162,7 +162,7 @@ $SddcManagerRestPassword = "VMware1!VMware1!"
 $SddcManagerLocalPassword = "VMware1!VMware1!"
 ```
 
-This section defines the number of Nested ESXi VMs to deploy along with their associated IP Address(s). The names are the display name of the VMs when deployed and you should ensure these are added to your DNS infrastructure. A minimum of four hosts is required for proper VCF deployment.
+Esta seção define o número de VMs ESXi Nested a serem implantadas, juntamente com seus endereços IP associados. Os nomes são os nomes de exibição das VMs quando implantadas, e você deve garantir que esses nomes sejam adicionados à sua infraestrutura DNS. Um mínimo de quatro hosts é necessário para a implantação adequada do VCF.
 ```console
 $NestedESXiHostnameToIPsForManagementDomain = @{
     "vcf-m01-esx01"   = "172.17.31.185"
@@ -172,7 +172,7 @@ $NestedESXiHostnameToIPsForManagementDomain = @{
 }
 ```
 
-This section defines the number of Nested ESXi VMs to deploy along with their associated IP Address(s) for use in a Workload Domain deployment. The names are the display name of the VMs when deployed and you should ensure these are added to your DNS infrastructure. A minimum of four hosts should be used for Workload Domain deployment
+Esta seção define o número de VMs ESXi Nested a serem implantadas, juntamente com seus endereços IP associados para uso em uma implantação de Domínio de Workload. Os nomes são os nomes de exibição das VMs quando implantadas, e você deve garantir que esses nomes sejam adicionados à sua infraestrutura DNS. Um mínimo de quatro hosts deve ser usado para a implantação do Domínio de Workload.
 ```console
 $NestedESXiHostnameToIPsForWorkloadDomain = @{
     "vcf-m01-esx05"   = "172.17.31.189"
@@ -182,9 +182,9 @@ $NestedESXiHostnameToIPsForWorkloadDomain = @{
 }
 ```
 
-**Note:** A VCF Management Domain can be deployed with just a single Nested ESXi VM. For more details, please see this [blog post](https://williamlam.com/2023/02/vmware-cloud-foundation-with-a-single-esxi-host-for-management-domain.html) for the required tweaks.
+**Nota:** Um Domínio de Gerenciamento do VCF pode ser implantado com apenas uma única VM ESXi Nested. Para mais detalhes, consulte este [post no blog](https://williamlam.com/2023/02/vmware-cloud-foundation-with-a-single-esxi-host-for-management-domain.html) para os ajustes necessários.
 
-This section describes the amount resources to allocate to either the Nested ESXi VM(s) for use with Managemen Domain as well as Workload Domain (if you choose to deploy.) Depending on your usage, you may want to increase the resources but for proper functionality, this is the minimum to start with. For Memory and Disk configuration, the unit is in GB.
+Esta seção descreve a quantidade de recursos a serem alocados para as VMs ESXi Nested, tanto para o Domínio de Gerenciamento quanto para o Domínio de Workload (caso você opte por implantá-lo). Dependendo do seu uso, você pode querer aumentar os recursos, mas para a funcionalidade adequada, este é o mínimo necessário para começar. Para a configuração de Memória e Disco, a unidade é em GB.
 ```console
 # Nested ESXi VM Resources for Management Domain
 $NestedESXiMGMTvCPU = "12"
@@ -202,7 +202,7 @@ $NestedESXiWLDCapacityvDisk = "250" #GB
 $NestedESXiWLDBootDisk = "32" #GB
 ```
 
-This section describes the Nested ESXi Networks that will be used for VCF configuration. For the ESXI management network, the CIDR definition should match the network specified in `$VMNetwork` variable.
+Esta seção descreve as Redes ESXi Nested que serão usadas para a configuração do VCF. Para a rede de gerenciamento do ESXi, a definição CIDR deve corresponder à rede especificada na variável `$VMNetwork`.
 ```console
 $NestedESXiManagementNetworkCidr = "172.17.31.0/24"
 $NestedESXivMotionNetworkCidr = "172.17.32.0/24"
@@ -210,7 +210,7 @@ $NestedESXivSANNetworkCidr = "172.17.33.0/24"
 $NestedESXiNSXTepNetworkCidr = "172.17.34.0/24"
 ```
 
-This section describes the configurations that will be used to deploy the VCSA within the Nested ESXi environment:
+Esta seção descreve as configurações que serão usadas para implantar o VCSA dentro do ambiente ESXi Nested:
 ```console
 $VCSAName = "vcf-m01-vc01"
 $VCSAIP = "172.17.31.182"
@@ -219,7 +219,7 @@ $VCSASSOPassword = "VMware1!"
 $EnableVCLM = $true
 ```
 
-This section describes the configurations that will be used to deploy the NSX-T infrastructure within the Nested ESXi environment:
+Esta seção descreve as configurações que serão usadas para implantar a infraestrutura NSX-T dentro do ambiente ESXi Nested:
 ```console
 $NSXManagerVIPHostname = "vcf-m01-nsx01"
 $NSXManagerVIPIP = "172.17.31.183"
@@ -230,7 +230,7 @@ $NSXAdminPassword = "VMware1!VMware1!"
 $NSXAuditPassword = "VMware1!VMware1!"
 ```
 
-This section describes the location as well as the generic networking settings applied to Nested ESXi & Cloud Builder VMs:
+Esta seção descreve a localização, bem como as configurações de rede genéricas aplicadas às VMs ESXi Nested e Cloud Builder:
 
 ```console
 $VMDatacenter = "San Jose"
@@ -247,17 +247,17 @@ $VMSyslog = "172.17.31.182"
 $VMFolder = "VCF"
 ```
 
-> **Note:** It is recommended that you use an NTP server that has both forward and DNS resolution configured. If this is not done, during the VCF JSON pre-req validation phase, it can take longer than expected for the DNS timeout to complete prior to allowing user to continue to VCF deployment.
+> **Nota:** É recomendável que você use um servidor NTP que tenha resolução direta e reversa de DNS configurada. Caso isso não seja feito, durante a fase de validação de pré-requisitos do JSON do VCF, pode levar mais tempo do que o esperado para que o tempo limite do DNS seja concluído antes de permitir que o usuário continue com a implantação do VCF.
 
-Once you have saved your changes, you can now run the PowerCLI script as you normally would.
+Depois de salvar suas alterações, você pode agora executar o script PowerCLI como faria normalmente.
 
-## Logging
+## Log
 
-There is additional verbose logging that outputs as a log file in your current working directory **vcf-lab-deployment.log**
+Há um log adicional detalhado que é gerado como um arquivo de log no seu diretório de trabalho atual **vcf-lab-deployment.log**
 
-## Sample Execution
+## Execução de Exemplo
 
-In the example below, I will be using a one /24 VLANs (172.17.31/0/24). The first network will be used to provision all VMs and place them under typical vSphere Management network configuration and 5 IPs will be allocated from this range for the Supervisor Control Plane and 8 IPs for the NSX ALB Service Engine. The second network will combine both IP ranges for the NSX ALB VIP/Frontend function as well as the IP ranges for Workloads. See the table below for the explicit network mappings and it is expected that you have a setup similar to what has been outlined.
+No exemplo abaixo, estarei utilizando uma VLAN /24 (172.17.31/0/24). A primeira rede será usada para provisionar todas as VMs e colocá-las sob a configuração típica da rede de Gerenciamento do vSphere, e 5 IPs serão alocados desta faixa para o Supervisor Control Plane e 8 IPs para o NSX ALB Service Engine. A segunda rede combinará ambas as faixas de IP para a função NSX ALB VIP/Frontend, bem como as faixas de IP para Workloads. Veja a tabela abaixo para os mapeamentos de rede explícitos, e espera-se que você tenha uma configuração semelhante ao que foi descrito.
 
 |           Hostname          | IP Address    | Function       |
 |:---------------------------:|---------------|----------------|
