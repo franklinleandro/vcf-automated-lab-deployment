@@ -1,6 +1,7 @@
-# Automated VMware Cloud Foundation Lab Deployment
+# Implantação Automatizada do VMware Cloud Foundation em Home Lab
 
-## Table of Contents
+
+## Conteúdo
 
 * [Description](#description)
 * [Changelog](#changelog)
@@ -343,7 +344,7 @@ Aqui está um exemplo do que será implantado como parte da criação do Workloa
 
 
 
-### Configuration
+### Configuração
 
 Esta seção descreve as credenciais do seu SDDC Manager implantado a partir da configuração do Management Domain:
 ```console
