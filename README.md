@@ -275,61 +275,62 @@ No exemplo abaixo, estarei utilizando uma VLAN /24 (172.17.31/0/24). A primeira 
 | vcf-m01-esx07.tshirts.inc   | 172.17.31.191 | ESXi Host 7    |
 | vcf-m01-esx08.tshirts.inc   | 172.17.31.192 | ESXi Host 8    |
 
-### Lab Deployment Script
+### Script de Implantação do Lab
 
-Here is a screenshot of running the script if all basic pre-reqs have been met and the confirmation message before starting the deployment:
+Aqui está uma captura de tela da execução do script se todos os pré-requisitos básicos tiverem sido atendidos e a mensagem de confirmação antes de iniciar a implantação:
 
 ![](screenshots/screenshot-1.png)
 
-Here is an example output of a complete deployment:
+Aqui está um exemplo de saída de uma implantação completa:
 
 ![](screenshots/screenshot-2.png)
 
-**Note:** Deployment time will vary based on underlying physical infrastructure resources. In my lab, this took ~19min to complete.
+**Nota:** O tempo de implantação pode variar com base nos recursos da infraestrutura física subjacente. No meu lab, isso levou cerca de 19 minutos para ser concluído.
 
-Once completed, you will end up with eight Nested ESXi VM and VMware Cloud Builder VMs which is placed into a vApp.
+Uma vez concluído, você terminará com oito VMs ESXi Nested e VMs do VMware Cloud Builder, que são colocadas em um vApp.
 
 ![](screenshots/screenshot-3.png)
 
-### Deploy VCF Management Domain
+### Implantar Domínio de Gerenciamento do VCF
 
-By default, the script will auto generate the required VCF Management Domain deployment file `vcf-mgmt.json` based off of your specific deployment and save that into the current working directory. Additionally, the VCF deployment file will automatically be submitted to SDDC Manager and begin the VCF Bringup process, which in previous versions of this script was performed manually by the end user.
+Por padrão, o script gerará automaticamente o arquivo de implantação necessário para o Domínio de Gerenciamento do VCF, `vcf-mgmt.json`, com base na sua implantação específica e o salvará no diretório de trabalho atual. Além disso, o arquivo de implantação do VCF será automaticamente enviado ao SDDC Manager e o processo de Bringup do VCF será iniciado, o que em versões anteriores deste script era feito manualmente pelo usuário final.
 
-Now you can just open a web browser to your SDDC Manager deployment and monitor the VCF Bringup progress.
+Agora, você pode simplesmente abrir um navegador da web na sua implantação do SDDC Manager e monitorar o progresso do Bringup do VCF.
 
 ![](screenshots/screenshot-4.png)
 
-**Note:** If you wish to disable the VCF Bringup process, simply search for the variable named `$startVCFBringup` in the script and change the value to 0.
+**Nota:** Se você deseja desabilitar o processo de Bringup do VCF, basta procurar a variável chamada `$startVCFBringup` no script e alterar o valor para 0.
 
-The deployment and configuration can take up to several hours to complete depending on the resources of your underlying hardware. In this example, the deployment took about ~1.5 to complete and you should see a success message as shown below.
+A implantação e a configuração podem levar várias horas para serem concluídas, dependendo dos recursos do seu hardware subjacente. Neste exemplo, a implantação levou cerca de 1,5 hora para ser concluída, e você deve ver uma mensagem de sucesso como mostrado abaixo.
 
 ![](screenshots/screenshot-6.png)
 
-Click on the Finish button which should prompt you to login to SDDC Manager. You will need to use `administrator@vsphere.local` credentials that you had configured within the deployment script for the deployed vCenter Server.
+Clique no botão Concluir, o que deverá solicitar que você faça login no SDDC Manager. Você precisará usar as credenciais `administrator@vsphere.local` que você configurou dentro do script de implantação para o vCenter Server implantado.
 
 ![](screenshots/screenshot-7.png)
 
+
 ### Deploy VCF Workload Domain
 
-## Manual Method
+## Método Manual
 
-By default, the script will auto generate the VCF Workload Domain host commission file `vcf-commission-host-ui.json` based off of your specific deployment and save that into the current working directory.
+Por padrão, o script gerará automaticamente o arquivo de comissão de hosts do Domínio de Workload do VCF, `vcf-commission-host-ui.json`, com base na sua implantação específica e o salvará no diretório de trabalho atual.
 
-Once the VCF Management Domain has been deployed, you can login to SDDC Manager UI and under `Inventory->Hosts`, click on the `COMMISSION HOSTS` button and upload the generated JSON configuration file.
+Uma vez que o Domínio de Gerenciamento do VCF tenha sido implantado, você pode fazer login na interface do SDDC Manager e, em `Inventory->Hosts`, clicar no botão `COMMISSION HOSTS` e fazer o upload do arquivo de configuração JSON gerado.
 
-**Note:** There is currently a different JSON schema between the SDDC Manager UI and API for host commission and the generated JSON file can only be used by SDDC Manager UI. For the API, you need to make some changes to the file including replacing the networkPoolName with the correct networkPoolId. For more details, please refer to the JSON format in the [VCF Host Commission API]([text](https://developer.vmware.com/apis/vcf/latest/v1/hosts/post/))
+**Nota:** Atualmente, existe um esquema JSON diferente entre a interface do SDDC Manager e a API para a comissão de hosts, e o arquivo JSON gerado só pode ser usado pela interface do SDDC Manager. Para a API, você precisará fazer algumas alterações no arquivo, incluindo substituir o `networkPoolName` pelo `networkPoolId` correto. Para mais detalhes, consulte o formato JSON na [API de Comissão de Hosts do VCF](https://developer.vmware.com/apis/vcf/latest/v1/hosts/post/).
 
 ![](screenshots/screenshot-8.png)
 
-Once the ESXi hosts have been added to SDDC Manager, then you can perform a manual VCF Workload Domain deployment using either the SDDC Manager UI or API.
+Uma vez que os hosts ESXi tenham sido adicionados ao SDDC Manager, você poderá realizar uma implantação manual do Domínio de Workload do VCF usando a interface do SDDC Manager ou a API.
 
 ![](screenshots/screenshot-9.png)
 
-## Automated Method
+## Método Automatizado
 
-A supplemental auotomation script `vcf-automated-workload-domain-deployment.ps1` will be used to automatically standup the workfload domain. It will assume that the VCF Workload Domain host commission file `vcf-commission-host-api.json` was generated from running the initial deployent script and this file will contain a "TBD" field because the SDDC Manager API expects the Management Domain Network Pool ID, which will be retrieved automatically as part of using the additional automation.
+Um script de automação suplementar, `vcf-automated-workload-domain-deployment.ps1`, será usado para configurar automaticamente o domínio de Workload. Ele assumirá que o arquivo de comissão de hosts do Domínio de Workload do VCF, `vcf-commission-host-api.json`, foi gerado a partir da execução do script de implantação inicial, e este arquivo conterá um campo "TBD" porque a API do SDDC Manager espera o ID do Pool de Rede do Domínio de Gerenciamento, que será recuperado automaticamente como parte do uso da automação adicional.
 
-Here is an example of what will be deployed as part of Workload Domain creation:
+Aqui está um exemplo do que será implantado como parte da criação do Domínio de Workload:
 
 |           Hostname          | IP Address    | Function       |
 |:---------------------------:|---------------|----------------|
@@ -342,21 +343,21 @@ Here is an example of what will be deployed as part of Workload Domain creation:
 
 ### Configuration
 
-This section describes the credentials to your deployed SDDC Manager from setting up the Management Domain:
+Esta seção descreve as credenciais do seu SDDC Manager implantado a partir da configuração do Domínio de Gerenciamento:
 ```console
 $sddcManagerFQDN = "FILL_ME_IN"
 $sddcManagerUsername = "FILL_ME_IN"
 $sddcManagerPassword = "FILL_ME_IN"
 ```
 
-This section defines the licenses for each component within VCF
+Esta seção define as licenças para cada componente dentro do VCF
 ```console
 $ESXILicense = "FILL_ME_IN"
 $VSANLicense = "FILL_ME_IN"
 $NSXLicense = "FILL_ME_IN"
 ```
 
-This section defines the Management and Workload Domain configurations, which the default values should be sufficient unless you have modified anything from the original deployment script
+Esta seção define as configurações do Domínio de Gerenciamento e do Domínio de Workload, onde os valores padrão devem ser suficientes, a menos que você tenha modificado algo no script de implantação original.
 ```console
 $VCFManagementDomainPoolName = "vcf-m01-rp01"
 $VCFWorkloadDomainAPIJSONFile = "vcf-commission-host-api.json"
@@ -367,16 +368,16 @@ $VLCMImageName = "Management-Domain-ESXi-Personality"
 $EnableVSANESA = $false
 ```
 
-> **Note:** If you're going to deploy VCF Workload Domain with vLCM enabled, make sure the `$VLCMImageName` name matches what you see in SDDC Manager under Lifecycle Management->Image Management. In VCF 5.2, the default name should be "Management-Domain-ESXi-Personality" and in VCF 5.1.x the default name should be "Management-Domain-Personality" but best to confirm before proceeding with deployment.
+> **Nota:** Se você for implantar o Domínio de Workload do VCF com o vLCM habilitado, certifique-se de que o nome `$VLCMImageName` corresponda ao que você vê no SDDC Manager em Lifecycle Management->Image Management. No VCF 5.2, o nome padrão deve ser "Management-Domain-ESXi-Personality", e no VCF 5.1.x, o nome padrão deve ser "Management-Domain-Personality", mas é melhor confirmar antes de prosseguir com a implantação.
 
-This section defines the vCenter Server configuration that will be used in the Workload Domain
+Esta seção define a configuração do vCenter Server que será usada no Domínio de Workload.
 ```console
 $VCSAHostname = "vcf-w01-vc01"
 $VCSAIP = "172.17.31.120"
 $VCSARootPassword = "VMware1!"
 ```
 
-This section defines the NSX Manager configurations that will be used in the Workload Domain
+Esta seção define as configurações do NSX Manager que serão usadas no Domínio de Workload.
 ```console
 $NSXManagerVIPHostname = "vcf-w01-nsx01"
 $NSXManagerVIPIP = "172.17.31.121"
@@ -390,31 +391,32 @@ $NSXAdminPassword = "VMware1!VMware1!"
 $SeparateNSXSwitch = $false
 ```
 
-This section defines basic networking information that will be needed to deploy vCenter and NSX components
+Esta seção define as informações básicas de rede que serão necessárias para implantar os componentes do vCenter e do NSX.
 ```console
 $VMNetmask = "255.255.255.0"
 $VMGateway = "172.17.31.1"
 $VMDomain = "tshirts.inc"
 ```
 
-### Example Deployment
+### Exemplo de Implantação
 
-Here is a screenshot of running the script if all basic pre-reqs have been met and the confirmation message before starting the deployment:
+Aqui está uma captura de tela da execução do script se todos os pré-requisitos básicos tiverem sido atendidos e a mensagem de confirmação antes de iniciar a implantação:
 
 ![](screenshots/screenshot-10.png)
 
-Here is an example output of a completed deployment:
+Aqui está um exemplo de saída de uma implantação concluída:
 
 ![](screenshots/screenshot-11.png)
 
-**Note:** While the script should finish ~3-4 minutes, the actual creation of the Workload Domain will take a bit longer and will depend on your resources.
+**Nota:** Embora o script deva ser concluído em cerca de 3-4 minutos, a criação real do Domínio de Workload levará um pouco mais de tempo e dependerá dos seus recursos.
 
-To monitor the progress of your Workload Domain deployment, login to the SDDC Manager UI
+Para monitorar o progresso da implantação do seu Domínio de Workload, faça login na interface do SDDC Manager.
 
 ![](screenshots/screenshot-12.png)
 
 ![](screenshots/screenshot-13.png)
 
-If you now login to your vSphere UI for your Management Domain, you should see the following inventory 
+Se você agora fizer login na interface do vSphere para o seu Domínio de Gerenciamento, deverá ver o seguinte inventário:
 
 ![](screenshots/screenshot-14.png)
+
