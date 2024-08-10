@@ -2,13 +2,13 @@
 # Website: www.williamlam.com
 
 # vCenter Server used to deploy VMware Cloud Foundation Lab
-$VIServer = "FILL-ME-IN"
-$VIUsername = "FILL-ME-IN"
-$VIPassword = "FILL-ME-IN"
+$VIServer = "vmb-vce01.vmbeer.local"
+$VIUsername = "Administrator@vsphere.local"
+$VIPassword = "VMware1!"
 
 # Full Path to both the Nested ESXi & Cloud Builder OVA
-$NestedESXiApplianceOVA = "/root/Nested_ESXi8.0u3_Appliance_Template_v1.ova"
-$CloudBuilderOVA = "/root/VMware-Cloud-Builder-5.2.0.0-24108943_OVF10.ova"
+$NestedESXiApplianceOVA = "C:\Temp\Nested_ESXi8.0u3_Appliance_Template_v1.ova"
+$CloudBuilderOVA = "C:\Temp\VMware-Cloud-Builder-5.2.0.0-24108943_OVF10.ova"
 
 # VCF Licenses or leave blank for evaluation mode (requires VCF 5.1.1 or later)
 $VCSALicense = ""
@@ -24,15 +24,15 @@ $VCFWorkloadDomainAPIJSONFile = "vcf-commission-host-api.json"
 
 # Cloud Builder Configurations
 $CloudbuilderVMHostname = "vcf-m01-cb01"
-$CloudbuilderFQDN = "vcf-m01-cb01.tshirts.inc"
-$CloudbuilderIP = "172.17.31.180"
+$CloudbuilderFQDN = "vcf-m01-cb01.vmbeer.local"
+$CloudbuilderIP = "192.168.68.2"
 $CloudbuilderAdminUsername = "admin"
 $CloudbuilderAdminPassword = "VMw@re123!VMw@re123!"
 $CloudbuilderRootPassword = "VMw@re123!VMw@re123!"
 
 # SDDC Manager Configuration
 $SddcManagerHostname = "vcf-m01-sddcm01"
-$SddcManagerIP = "172.17.31.181"
+$SddcManagerIP = "192.168.68.3"
 $SddcManagerVcfPassword = "VMware1!VMware1!"
 $SddcManagerRootPassword = "VMware1!VMware1!"
 $SddcManagerRestPassword = "VMware1!VMware1!"
@@ -40,69 +40,69 @@ $SddcManagerLocalPassword = "VMware1!VMware1!"
 
 # Nested ESXi VMs for Management Domain
 $NestedESXiHostnameToIPsForManagementDomain = @{
-    "vcf-m01-esx01"   = "172.17.31.185"
-    "vcf-m01-esx02"   = "172.17.31.186"
-    "vcf-m01-esx03"   = "172.17.31.187"
-    "vcf-m01-esx04"   = "172.17.31.188"
+    "vcf-m01-esx01"   = "192.168.68.7"
+    "vcf-m01-esx02"   = "192.168.68.8"
+    "vcf-m01-esx03"   = "192.168.68.9"
+    "vcf-m01-esx04"   = "192.168.68.10"
 }
 
 # Nested ESXi VMs for Workload Domain
 $NestedESXiHostnameToIPsForWorkloadDomain = @{
-    "vcf-m01-esx05"   = "172.17.31.189"
-    "vcf-m01-esx06"   = "172.17.31.190"
-    "vcf-m01-esx07"   = "172.17.31.191"
-    "vcf-m01-esx08"   = "172.17.31.192"
+    "vcf-m01-esx05"   = "192.168.68.11"
+    "vcf-m01-esx06"   = "192.168.68.12"
+    "vcf-m01-esx07"   = "192.168.68.13"
+    "vcf-m01-esx08"   = "192.168.68.14"
 }
 
 # Nested ESXi VM Resources for Management Domain
 $NestedESXiMGMTvCPU = "12"
 $NestedESXiMGMTvMEM = "78" #GB
 $NestedESXiMGMTCachingvDisk = "4" #GB
-$NestedESXiMGMTCapacityvDisk = "500" #GB
+$NestedESXiMGMTCapacityvDisk = "200" #GB
 $NestedESXiMGMTBootDisk = "32" #GB
 
 # Nested ESXi VM Resources for Workload Domain
 $NestedESXiWLDVSANESA = $false
 $NestedESXiWLDvCPU = "8"
-$NestedESXiWLDvMEM = "36" #GB
+$NestedESXiWLDvMEM = "12" #GB
 $NestedESXiWLDCachingvDisk = "4" #GB
-$NestedESXiWLDCapacityvDisk = "250" #GB
+$NestedESXiWLDCapacityvDisk = "100" #GB
 $NestedESXiWLDBootDisk = "32" #GB
 
 # ESXi Network Configuration
-$NestedESXiManagementNetworkCidr = "172.17.31.0/24" # should match $VMNetwork configuration
+$NestedESXiManagementNetworkCidr = "192.168.68.0/24" # should match $VMNetwork configuration
 $NestedESXivMotionNetworkCidr = "172.17.32.0/24"
 $NestedESXivSANNetworkCidr = "172.17.33.0/24"
 $NestedESXiNSXTepNetworkCidr = "172.17.34.0/24"
 
 # vCenter Configuration
 $VCSAName = "vcf-m01-vc01"
-$VCSAIP = "172.17.31.182"
+$VCSAIP = "192.168.68.4"
 $VCSARootPassword = "VMware1!"
 $VCSASSOPassword = "VMware1!"
 $EnableVCLM = $true
 
 # NSX Configuration
 $NSXManagerVIPHostname = "vcf-m01-nsx01"
-$NSXManagerVIPIP = "172.17.31.183"
+$NSXManagerVIPIP = "192.168.68.5"
 $NSXManagerNode1Hostname = "vcf-m01-nsx01a"
-$NSXManagerNode1IP = "172.17.31.184"
+$NSXManagerNode1IP = "192.168.68.6"
 $NSXRootPassword = "VMware1!VMware1!"
 $NSXAdminPassword = "VMware1!VMware1!"
 $NSXAuditPassword = "VMware1!VMware1!"
 
 # General Deployment Configuration for Nested ESXi & Cloud Builder VM
-$VMDatacenter = "San Jose"
-$VMCluster = "Compute Cluster"
-$VMNetwork = "sjc-comp-mgmt (1731)"
-$VMDatastore = "comp-vsanDatastore"
+$VMDatacenter = "VMB-DATACENTER"
+$VMCluster = "VMB-CLUSTER"
+$VMNetwork = "PG-MANAGEMENT"
+$VMDatastore = "vsanDatastore"
 $VMNetmask = "255.255.255.0"
-$VMGateway = "172.17.31.1"
-$VMDNS = "172.17.31.2"
-$VMNTP = "172.17.31.2"
+$VMGateway = "192.168.68.1"
+$VMDNS = "192.168.68.145"
+$VMNTP = "192.168.68.145"
 $VMPassword = "VMware1!"
-$VMDomain = "tshirts.inc"
-$VMSyslog = "172.17.31.182"
+$VMDomain = "vmbeer.local"
+$VMSyslog = "192.168.68.4"
 $VMFolder = "VCF"
 
 #### DO NOT EDIT BEYOND HERE ####
@@ -122,7 +122,7 @@ $moveVMsIntovApp = 1
 $generateMgmJson = 1
 $startVCFBringup = 1
 $generateWldHostCommissionJson = 1
-$uploadVCFNotifyScript = 0
+$uploadVCFNotifyScript = 1
 
 $srcNotificationScript = "vcf-bringup-notification.sh"
 $dstNotificationScript = "/root/vcf-bringup-notification.sh"
@@ -873,7 +873,7 @@ if($startVCFBringup -eq 1) {
 
 if($startVCFBringup -eq 1 -and $uploadVCFNotifyScript -eq 1) {
     if(Test-Path $srcNotificationScript) {
-        $cbVM = Get-VM -Server $viConnection $CloudbuilderFQDN
+        $cbVM = Get-VM -Server $viConnection $CloudbuilderVMHostname
 
         My-Logger "Uploading VCF notification script $srcNotificationScript to $dstNotificationScript on Cloud Builder appliance ..."
         Copy-VMGuestFile -Server $viConnection -VM $cbVM -Source $srcNotificationScript -Destination $dstNotificationScript -LocalToGuest -GuestUser "root" -GuestPassword $CloudbuilderRootPassword | Out-Null
