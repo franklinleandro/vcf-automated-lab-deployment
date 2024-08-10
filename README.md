@@ -91,7 +91,7 @@ Abaixo está um diagrama do que é implantado como parte da solução, e você s
         * Capacidade de provisionar até 384 GB de memória
         * Cluster habilitado com DRS (não obrigatório, mas a criação de vApps não será possível)
     * Rede
-        * 1 x Portgroup Padrão ou Distribuído (roteável) para implantar todas as VMs (VCSA, NSX-T Manager & NSX-T Edge)
+        * 1 x Standard or Distributed Portgroup (roteável) para implantar todas as VMs (VCSA, NSX-T Manager & NSX-T Edge)
            * 13 x Endereços IP para Cloud Builder, SDDC Manager, VCSA, ESXi e VMs NSX-T
            * 9 x Endereços IP para implantação do Workload Domain (se aplicável) para ESXi, NSX e VCSA
     * Armazenamento
