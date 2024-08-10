@@ -1,9 +1,9 @@
 # Author: William Lam
 # Website: www.williamlam.com
 
-$sddcManagerFQDN = "FILL_ME_IN"
-$sddcManagerUsername = "FILL_ME_IN"
-$sddcManagerPassword = "FILL_ME_IN"
+$sddcManagerFQDN = "vcf-m01-sddcm01.vmbeer.local"
+$sddcManagerUsername = "admin@local"
+$sddcManagerPassword = "VMware1!VMware1!"
 
 # License Later feature only applicable for VCF 5.1.1 and later
 $LicenseLater = $true
@@ -19,29 +19,29 @@ $VCFWorkloadDomainAPIJSONFile = "vcf-commission-host-api.json"
 $VCFWorkloadDomainName = "wld-w01"
 $VCFWorkloadDomainOrgName = "vcf-w01"
 $EnableVCLM = $true
-$VLCMImageName = "Management-Domain-ESXi-Personality" # Ensure this label matches in SDDC Manager->Lifecycle Management->Image Management
+$VLCMImageName = "Management-Domain-ESXi-Personality"
 $EnableVSANESA = $false
 
 # vCenter Configuration
 $VCSAHostname = "vcf-w01-vc01"
-$VCSAIP = "172.17.31.120"
+$VCSAIP = "192.168.68.15"
 $VCSARootPassword = "VMware1!"
 
 # NSX Configuration
 $NSXManagerVIPHostname = "vcf-w01-nsx01"
-$NSXManagerVIPIP = "172.17.31.121"
-$NSXManagerNode1Hostname = "vcf-m01-nsx01a"
-$NSXManagerNode1IP = "172.17.31.122"
-$NSXManagerNode2Hostname = "vcf-m01-nsx01b"
-$NSXManagerNode2IP = "172.17.31.123"
-$NSXManagerNode3Hostname = "vcf-m01-nsx01c"
-$NSXManagerNode3IP = "172.17.31.124"
+$NSXManagerVIPIP = "192.168.68.16"
+$NSXManagerNode1Hostname = "vcf-w01-nsx01a"
+$NSXManagerNode1IP = "192.168.68.17"
+$NSXManagerNode2Hostname = "vcf-w01-nsx01b"
+$NSXManagerNode2IP = "192.168.68.18"
+$NSXManagerNode3Hostname = "vcf-w01-nsx01c"
+$NSXManagerNode3IP = "192.168.68.19"
 $NSXAdminPassword = "VMware1!VMware1!"
 $SeparateNSXSwitch = $false
 
 $VMNetmask = "255.255.255.0"
-$VMGateway = "172.17.31.1"
-$VMDomain = "tshirts.inc"
+$VMGateway = "192.168.68.1"
+$VMDomain = "vmbeer.local"
 
 #### DO NOT EDIT BEYOND HERE ####
 
