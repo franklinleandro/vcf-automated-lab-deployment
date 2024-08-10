@@ -1,25 +1,16 @@
 # Implantação Automatizada do VMware Cloud Foundation em Home Lab
 
 
-## Conteúdo
+## Observação
 
-* [Description](#description)
-* [Changelog](#changelog)
-* [Requirements](#requirements)
-* [Configuration](#configuration)
-* [Logging](#logging)
-* [Sample Execution](#sample-execution)
-    * [Lab Deployment Script](#lab-deployment-script)
-    * [Deploy VCF Management Domain](#deploy-vcf-management-domain)
-    * [Deploy VCF Workload Domain](#deploy-vcf-workload-domain)
+Este repositório foi criado a partir da cópia do [repositório](https://github.com/lamw/vcf-automated-lab-deployment) do William Lam, então todos os créditos pertencem a ele.
+Eu realizei ajustes de acordo com as minhas necessidades, bem como ajustei e traduzi o conteúdo do README para facilitar o entendimento daqueles que possuem dificuldades no idioma Inglês.
 
 ## Descrição
 
-Semelhante aos scripts anteriores de "Implantação Automática de Laboratórios" (como [aqui](https://www.williamlam.com/2016/11/vghetto-automated-vsphere-lab-deployment-for-vsphere-6-0u2-vsphere-6-5.html), [aqui](https://www.williamlam.com/2017/10/vghetto-automated-nsx-t-2-0-lab-deployment.html), [aqui](https://www.williamlam.com/2018/06/vghetto-automated-pivotal-container-service-pks-lab-deployment.html), [aqui](https://www.williamlam.com/2020/04/automated-vsphere-7-and-vsphere-with-kubernetes-lab-deployment-script.html), [aqui](https://www.williamlam.com/2020/10/automated-vsphere-with-tanzu-lab-deployment-script.html) e [aqui](https://williamlam.com/2021/04/automated-lab-deployment-script-for-vsphere-with-tanzu-using-nsx-advanced-load-balancer-nsx-alb.html)), este script torna muito fácil para qualquer pessoa implantar um VMware Cloud Foundation (VCF) "básico" em um ambiente de laboratório nested para fins de aprendizado e educação. Todos os componentes VMware necessários (VMs ESXi e Cloud Builder) são automaticamente implantados e configurados para permitir que o VCF seja implantado e configurado usando o VMware Cloud Builder. Para mais informações, você pode consultar a documentação oficial do [VMware Cloud Foundation](https://docs.vmware.com/en/VMware-Cloud-Foundation/4.0/com.vmware.vcf.ovdeploy.doc_40/GUID-F2DCF1B2-4EF6-444E-80BA-8F529A6D0725.html).
+Este script torna muito fácil para qualquer pessoa implantar um VMware Cloud Foundation (VCF) "básico" em um ambiente de laboratório nested para fins de aprendizado e educação. Todos os componentes VMware necessários (VMs do ESXi e Cloud Builder) são automaticamente implantados e configurados para permitir que o VCF seja implantado e configurado usando o VMware Cloud Builder. Para mais informações, você pode consultar a documentação oficial do [VMware Cloud Foundation](https://docs.vmware.com/en/VMware-Cloud-Foundation/index.html).
 
 Abaixo está um diagrama do que é implantado como parte da solução, e você só precisa ter um ambiente vSphere existente rodando, gerenciado pelo vCenter Server e com recursos suficientes (CPU, Memória e Armazenamento) para implantar este laboratório "nested". Para habilitação do VCF (operação pós-implantação), consulte a seção [Execução de Exemplo](#sample-execution) abaixo.
-
-Agora você está pronto para usar o VCF! 😁
 
 ![](screenshots/screenshot-0.png)
 
@@ -32,15 +23,15 @@ Agora você está pronto para usar o VCF! 😁
     * Adiciona variável `$SeparateNSXSwitch` para especificar um VDS separado para o NSX (similar à opção do Management Domain)
 * **28/05/2024**
   * Management Domain:
-    * Refatora a geração do JSON do Management Domain do VCF para ser mais dinâmica
-    * Refatora o código de licenciamento para suportar tanto chaves licenciadas quanto a funcionalidade de licenciamento posterior
+    * Reorganiza a geração do JSON do Management Domain do VCF para ser mais dinâmica
+    * Reorganiza o código de licenciamento para suportar tanto chaves licenciadas quanto a funcionalidade de licenciamento posterior
     * Adiciona `clusterImageEnabled` ao JSON por padrão usando a variável `$EnableVCLM`
   * Workload Domain:
     * Adiciona variável `$EnableVCLM` para controlar a imagem baseada em vLCM para o Cluster do vSphere
     * Adiciona variável `$VLCMImageName` para especificar a imagem baseada em vLCM desejada (por padrão usa o Management Domain)
     * Adiciona variável `$EnableVSANESA` para especificar se o vSAN ESA está habilitado
     * Adiciona variável `$NestedESXiWLDVSANESA` para especificar se a VM ESXi Nested para WLD será usada para vSAN ESA, requerendo um controlador NVME ao invés de um controlador PVSCSI (padrão)
-    * Refatora o código de licenciamento para suportar tanto chaves licenciadas quanto a funcionalidade de licenciamento posterior
+    * Reorganiza o código de licenciamento para suportar tanto chaves licenciadas quanto a funcionalidade de licenciamento posterior
 * **27/03/2024**
   * Adiciona suporte para licenciamento posterior (também conhecido como modo de avaliação de 60 dias)
 * **08/02/2024**
@@ -106,7 +97,7 @@ Agora você está pronto para usar o VCF! 😁
     * Armazenamento
         * Capacidade de provisionar até 1,25 TB de armazenamento
 
-        **Nota:** Para requisitos detalhados, consulte a planilha de planejamento e preparação [aqui](https://docs.vmware.com/en/VMware-Cloud-Foundation/5.1/vcf-planning-and-preparation-workbook.zip)
+        **Nota:** Para requisitos detalhados, consulte a planilha de planejamento e preparação [aqui](https://docs.vmware.com/en/VMware-Cloud-Foundation/5.2/vcf-planning-and-preparation-workbook.zip)
 * Licenças do VMware Cloud Foundation 5.x para vCenter, ESXi, vSAN e NSX-T (VCF 5.1.1 ou posterior suporta a funcionalidade [Licenciar Depois](https://williamlam.com/2024/03/enabling-license-later-evaluation-mode-for-vmware-cloud-foundation-vcf-5-1-1.html), portanto, as chaves de licença agora são opcionais)
 * Desktop (Windows, Mac ou Linux) com o PowerShell Core mais recente e PowerCLI 12.1 Core instalado. Veja [instruções aqui](https://blogs.vmware.com/PowerCLI/2018/03/installing-powercli-10-0-0-macos.html) para mais detalhes
 
