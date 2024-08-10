@@ -1,5 +1,5 @@
 #!/bin/bash
-WEBHOOK_URL="https://hooks.slack.com/services/LINK"
+WEBHOOK_URL="COLE-AQUI-SEU-WEBHOOK"
 grep 'End of Orchestration' /var/log/vmware/vcf/bringup/*.log > /dev/null 2>&1
 if [ $? -eq 0 ]; then
         BRINGUP_LOGENTRY=$(grep 'End of Orchestration' /var/log/vmware/vcf/bringup/*.log | head -1 | awk '{print $1}')
