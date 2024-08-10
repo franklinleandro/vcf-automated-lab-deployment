@@ -4,7 +4,7 @@
 # vCenter Server used to deploy VMware Cloud Foundation Lab
 $VIServer = "vmb-vce01.vmbeer.local"
 $VIUsername = "Administrator@vsphere.local"
-$VIPassword = "#BAfrjhtt@25"
+$VIPassword = "VMware1!"
 
 # Full Path to both the Nested ESXi & Cloud Builder OVA
 $NestedESXiApplianceOVA = "C:\Temp\Nested_ESXi8.0u3_Appliance_Template_v1.ova"
