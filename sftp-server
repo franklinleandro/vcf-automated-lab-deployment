@@ -1,0 +1,67 @@
+# Instala o serviço SSH.
+sudo apt install ssh
+
+# Abre o arquivo de configuração do servidor SSH.
+sudo nano /etc/ssh/sshd_config
+
+# Colar no final do arquivo de configuração.
+# Configura o SSH para restringir o acesso dos usuários do grupo sftp ao diretório /sftp elevando a segurança.
+Match group sftp
+ChrootDirectory /sftp
+X11Forwarding no
+AllowTcpForwarding no
+ForceCommand internal-sftp
+
+# Alterar o subsistema SFTP para internal-sftp, utilizando uma implementação interna mais segura.
+Subsystem sftp /usr/lib/openssh/sftp-server
+para
+Subsystem sftp internal-sftp
+
+# Reinicia o serviço SSH.
+sudo systemctl restart ssh
+
+# Cria um novo grupo chamado sftp para gerenciar os usuários que terão acesso SFTP.
+sudo addgroup sftp
+
+# Cria um novo usuário vcf_backup no grupo sftp, com diretório inicial /vcf_backup e sem acesso de login shell.
+sudo useradd -g sftp -d /vcf_backup -s /sbin/nologin vcf_backup
+
+# Define uma senha.
+# OBS: Apenas os caracteres permitidos sao [~, !, @, ^, -, _, +]
+sudo passwd vcf_backup
+
+# Para SDDC Manager.
+# Cria o diretório para armazenar backups do SDDC Manager.
+sudo mkdir -p /sftp/sddc_manager
+
+# Define o proprietário do diretório /sftp como root, garantindo que apenas o root possa modificar sua estrutura.
+sudo chown root:root /sftp
+
+# Define permissões para o diretório /sftp que permitem a navegação, mas não a modificação por usuários comuns.
+sudo chmod 755 /sftp
+
+# Define o proprietário do diretório /sftp/sddc_manager como vcf_backup, permitindo que este usuário gerencie os backups.
+sudo chown vcf_backup:sftp /sftp/sddc_manager
+
+# Define permissões restritas para o diretório /sftp/sddc_manager, assegurando que apenas vcf_backup tenha acesso total.
+sudo chmod 700 /sftp/sddc_manager
+
+# Para NSX
+sudo mkdir -p /sftp/nsx
+sudo chown root:root /sftp
+sudo chmod 755 /sftp
+sudo chown vcf_backup:sftp /sftp/nsx
+sudo chmod 700 /sftp/nsx
+
+# Para vCenter
+sudo mkdir -p /sftp/vcenter
+sudo chown root:root /sftp
+sudo chmod 755 /sftp
+sudo chown vcf_backup:sftp /sftp/vcenter
+sudo chmod 700 /sftp/vcenter
+
+# Instala a ferramenta tree, que exibe a estrutura de diretórios em formato de árvore.
+sudo apt install tree
+
+# Mostra a estrutura de diretórios sob /sftp, permitindo verificar visualmente a configuração correta dos diretórios.
+sudo tree /sftp
