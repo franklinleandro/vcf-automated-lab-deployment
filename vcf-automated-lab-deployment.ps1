@@ -94,7 +94,7 @@ $NSXAuditPassword = "VMware1!VMware1!"
 # General Deployment Configuration for Nested ESXi & Cloud Builder VM
 $VMDatacenter = "VMB-DATACENTER"
 $VMCluster = "VMB-CLUSTER"
-$VMNetwork = "PG-MANAGEMENT"
+$VMNetwork = "pg-mgmt"
 $VMDatastore = "vsanDatastore"
 $VMNetmask = "255.255.255.0"
 $VMGateway = "192.168.68.1"
